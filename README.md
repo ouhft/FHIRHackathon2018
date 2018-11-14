@@ -35,27 +35,26 @@ Additionally later stage, what do we hand off to the ward?
 
 **Assumption**: The consuming organisation is OUH and therefore Cerner.
 
-References:
+#### References:
 
-* FHIR - HL7 Default: [http://hl7.org/fhir/]()
-* UK FHIR Profile: [https://fhir.hl7.org.uk]()
-* CareConnect: 
+**FHIR Profiles**
+1. L1
+   * fhir.org
+   * HL7 Default: [http://hl7.org/fhir/]()
+2. L2 - UK FHIR Profile: [https://fhir.hl7.org.uk]()
+   * things may be taken out
+   * add extensions, e.g. NHSNumberStatusCode, SNOMEDDescriptionID
+3.  L3 - [fhir.nhs.uk]()
 
-Patient Record found by 
+Patient Record found by:
 
+* Locate the patient by their NHS number on the reference system...
 * Care Connect Ref Implementation: [https://data.developer.nhs.uk/ccri-fhir/STU3/Patient?identifier=9658218873]()
-  * Returns a Patient ID (1183)	
-* HiE Record: [https://data.developer.nhs.uk/ccri/ed/patient/1183/observation]() 
-* 
+  * Returns a Patient ID (1183) which then unlocks the following...
+* HiE Record: [https://data.developer.nhs.uk/ccri/ed/patient/1183/observation]()
+* Medications: [https://data.developer.nhs.uk/ccri-fhir/STU3/MedicationStatement?patient=1183]()
 
 #### Project Aims
 
 **Big Picture** - Data should flow into the ED before the patient arrives at the doors. 111 and SCAS (ambulances) should share their data with OUH, which can then send out queries to other likely locations for data on this patient. The results of which can be shown within the PowerChart for the patient on arrival.
 
-# FHIR Profiles
-
- - L1 - fhir.org
- - L2 - fhir.hl7.org.uk
-    - things may be taken out
-    - add extensions, e.g. NHSNumberStatusCode, SNOMEDDescriptionID
- - L3 - fhir.nhs.uk
