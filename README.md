@@ -76,3 +76,17 @@ The technical path is something like:
 7. After/during examination, these foreign records can then be easily selected and validated for inclusion in the latest ED encounter record for their EPR
 8. This data can then be finalised during discharge, and exposed to the next service (Ward in this example) to care for Michael
 
+
+For the A&E Clerking activity, we want a streamlined process, that allows for data to be reviewed, and easily amended/accepted. Marcus Bow's concept of [Medical Markdown](https://github.com/open-health-hub/medical-markdown) is an appealing approach to dynamic documentation (though some vendors may have a similar concept). 
+
+##### Clerking Protocol
+
+* **Pc** - Presenting Complaint. One or two words describing the problem. Ideally will come from 111 data
+* **HPc** - History of Presenting Complaint. Longer textual description about events leading to the Pc. Ideally can be captured from 111 data.
+* **PMH** - Past Medical History. A list of medical encounters with complaints and outcomes. Ideally can come from the Primary Care / GP records.
+* **DH** - Drug History. Medications past and present, with dosage and patterns. Ideally from existing data and GP records. Massive time-saver on data entry if this can be quickly validated over being captured from nothing.
+* **Allergies** - name on the tin.
+* **On Examination** - a descriptive record, laced with items that ought to be codified data, like Pulse, Blood Pressure, Temperature, Weight, etc
+* **Tests** - results from labs, etc
+* **Diagnosis** - Pick your code
+* **Care Plan** - And state your orders
