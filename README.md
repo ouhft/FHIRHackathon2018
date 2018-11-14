@@ -29,3 +29,11 @@ Patient Record found by
 
 * Care Connect Ref Implementation: [https://data.developer.nhs.uk/ccri-fhir/STU3/Patient?identifier=9658218873]()
 
+
+# FHIR Profiles
+
+ - L1 - fhir.org
+ - L2 - fhir.hl7.org.uk
+    - things may be taken out
+    - add extensions, e.g. NHSNumberStatusCode, SNOMEDDescriptionID
+ - L3 - fhir.nhs.uk
