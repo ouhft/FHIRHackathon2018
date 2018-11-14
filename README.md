@@ -32,8 +32,10 @@ Patient Record found by
 
 # FHIR Profiles
 
- - L1 - fhir.org
+ - L1 - fhir.orgg
  - L2 - fhir.hl7.org.uk
     - things may be taken out
     - add extensions, e.g. NHSNumberStatusCode, SNOMEDDescriptionID
  - L3 - fhir.nhs.uk
+    - Compositions
+    - Allow for higher-level conformances
