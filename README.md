@@ -45,6 +45,8 @@ Additionally later stage, what do we hand off to the ward?
    * things may be taken out
    * add extensions, e.g. NHSNumberStatusCode, SNOMEDDescriptionID
 3.  L3 - [fhir.nhs.uk]()
+   * Compositions
+   * Allow for higher-level conformances
 
 Patient Record found by:
 
