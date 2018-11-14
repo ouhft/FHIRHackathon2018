@@ -84,7 +84,7 @@ The technical path is something like:
 8. This data can then be finalised during discharge, and exposed to the next service (Ward in this example) to care for Michael
 
 
-For the A&E Clerking activity, we want a streamlined process, that allows for data to be reviewed, and easily amended/accepted. Marcus Bow's concept of [Medical Markdown](https://github.com/open-health-hub/medical-markdown) is an appealing approach to dynamic documentation (though some vendors may have a similar concept). 
+For the A&E Clerking activity, we want a streamlined process, that allows for data to be reviewed, and easily amended/accepted. Marcus Baw's concept of [Medical Markdown](https://github.com/open-health-hub/medical-markdown) is an appealing approach to dynamic documentation (though some vendors may have a similar concept). 
 
 ##### Clerking Protocol
 
