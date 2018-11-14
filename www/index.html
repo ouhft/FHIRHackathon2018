@@ -19,6 +19,16 @@
                 vertical-align: top;
             }
 
+            .encounterId {
+                background: #2f8f17;
+                color: white;
+                padding: 0.1em 0.5em;
+                font-weight: bold;
+                font-size: 90%;
+                border-radius: 20px;
+                vertical-align: top;
+            }
+
             .patient {
                 border-radius: 4px;
                 background: #dddddd;
@@ -58,7 +68,7 @@
             }
 
             .date {
-                color: #333333;
+                color: #aaaaaa;
                 padding-left: 1em;
                 border-left: 1px solid #aaa;
             }
@@ -86,11 +96,11 @@
         <div data-bind="css: { inReview: isReviewing() }">
             <div data-bind="if: Encounters">
                 <h2>Encounters</h2>
-                <ul data-bind="foreach: Encounters">
+                <ol data-bind="foreach: Encounters">
                     <li>
                         <span data-bind="text: name"></span><span class="date" data-bind="text: dateEnd"></span>
                     </li>
-                </ul>
+                </ol>
             </div>
             <div data-bind="if: Allergies">
                 <h2>Allergies</h2>
@@ -104,7 +114,7 @@
                 <h2>Conditions</h2>
                 <ul data-bind="foreach: Conditions">
                     <li data-bind="css: { notReviewed: !reviewed() }">
-                        <input type="checkbox" class="checkbox" data-bind="checked: reviewed" /><span data-bind="text: name"><span class="date" data-bind="text: date"></span>
+                        <input type="checkbox" class="checkbox" data-bind="checked: reviewed" /><span class="encounterId" data-bind="visible: encounterId, text: encounterId"></span><span data-bind="text: name"></span><span class="date" data-bind="text: date"></span>
                     </li>
                 </ul>
             </div>

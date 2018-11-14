@@ -48,6 +48,7 @@ function ViewModel() {
         if (!(patient = self.Patient())) return;
         if (!(patientId = self.patientId())) return;
 
+        console.log(patient);
         if (!patient.confirmed()) return;
 
         console.log("Fetch observations");
@@ -62,6 +63,46 @@ function ViewModel() {
     self.removedAllergies = ko.observable([]);
     self.removedConditions = ko.observable([]);
 
+    self.Encounters = ko.computed(function() {
+        if (!(patientData = self.patientData())) return null;
+
+        encounters = [];
+
+        for(var entry of patientData["entry"]) {
+            resource = entry["resource"];
+            if (resource["resourceType"] == "Encounter") {
+                encounter = {
+                    "name": resource["type"]["0"]["coding"][0]["display"],
+                };
+
+                if (resource["period"]) {
+                    encounter["dateEnd"] = timeago().format(resource["period"]["end"])
+                } else {
+                    encounter["dateEnd"] = "Date unknown"
+                }
+
+                encounters.push(encounter);
+
+            }
+        }
+
+        return encounters;
+    });
+
+    self.EncounterIds = ko.computed(function() {
+        if (!(patientData = self.patientData())) return null;
+
+        ids = [];
+
+        for(var entry of patientData["entry"]) {
+            resource = entry["resource"];
+            if (resource["resourceType"] == "Encounter") {
+                ids.push("Encounter/" + resource["id"]);
+            }
+        }
+
+        return ids;
+    });
 
     self.Allergies = ko.computed(function() {
         if (!(patientData = self.patientData())) return null;
@@ -95,43 +136,21 @@ function ViewModel() {
                     "id": resource["id"],
                     "name": resource["code"]["coding"][0]["display"],
                     "reviewed": ko.observable(true),
+                    "encounterId": null,
                 }
                 if (resource["assertedDate"]) {
                     c["date"] = timeago().format(resource["assertedDate"])
                 } else {
                     c["date"] = "Date unknown"
                 }
+                if (resource["context"]) {
+                    c["encounterId"] = self.EncounterIds().indexOf(resource["context"]["reference"]) + 1
+                }
                 conditions.push(c);
             }
         }
 
         return conditions;
-    });
-
-    self.Encounters = ko.computed(function() {
-        if (!(patientData = self.patientData())) return null;
-
-        encounters = [];
-
-        for(var entry of patientData["entry"]) {
-            resource = entry["resource"];
-            if (resource["resourceType"] == "Encounter") {
-                encounter = {
-                    "name": resource["type"]["0"]["coding"][0]["display"],
-                };
-
-                if (resource["period"]) {
-                    encounter["dateEnd"] = timeago().format(resource["period"]["end"])
-                } else {
-                    encounter["dateEnd"] = "Date unknown"
-                }
-
-                encounters.push(encounter);
-
-            }
-        }
-
-        return encounters;
     });
 
     self.Procedures = ko.computed(function() {
