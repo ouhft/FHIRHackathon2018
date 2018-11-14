@@ -8,6 +8,8 @@ function ViewModel() {
     self.medicalMarkdown = ko.observable("");
 
     self.nhsNumber.subscribe(function() {
+        self.patient(null);
+        self.patientData(null);
         // Fetch patient ID here.
         $.getJSON("https://data.developer.nhs.uk/ccri-fhir/STU3/Patient?identifier=" + self.nhsNumber(), function(data) {
             patientData = data["entry"][0];
