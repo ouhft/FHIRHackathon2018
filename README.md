@@ -62,8 +62,17 @@ Patient Record found by:
 
 ![](docs/img/Hackathon-context.png)
 
+**The Dream** - We want the act of 111 calling an ambulance to trigger the pre-population of the ED encounter record for the ED Clinicians before the patient arrives, allowing them to both familiarise themselves with the incoming (and triage more effectively), and save them vital time on record keeping by picking from existing data alongside their own observations.
 
+The technical path is something like:
 
-
-
+1. Patient calls 111 reporting their problems. 111 create their own record about the patient, perhaps using available data sources for background. 
+2. 111 refers the patient to ED, and orders and Ambulance to transport them
+3. The Ambulance Service despatches the crew, supplying them with the data from 111, and alerting the ED of the incoming patient.
+4. That alert triggers a process at the ED that firstly gets the patient details from service X
+   * What about non-UK Patients?
+5. The process then continues to query 111, and the Ambulance service for encounter details as they occur, and then widens the search to include Primary Care and other sources for further clinically relevant information
+6. This data is collated and stored in the ED EPR, where the ED clinician is able to review all the evidence
+7. After/during examination, these foreign records can then be easily selected and validated for inclusion in the latest ED encounter record for their EPR
+8. This data can then be finalised during discharge, and exposed to the next service (Ward in this example) to care for Michael
 
