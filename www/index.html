@@ -7,6 +7,13 @@
             body {
                 font-family: "Montserrat"
             }
+
+            .chip {
+                background: #7fb1e0;
+                padding: 0.1em 0.25em;
+                font-weight: bold;
+            }
+
             .patient {
                 border-radius: 4px;
                 background: #dddddd;
@@ -87,10 +94,13 @@
 
         <div data-bind="if: isReviewing()">
             <div>
-                <textarea cols="50" rows="10"></textarea>
+                <textarea data-bind="textInput: medicalMarkdown" cols="50" rows="10"></textarea>
             </div>
+        </div>
+        <div data-bind="foreach: ParsedMedical">
             <div>
-
+                <span class="chip" data-bind="visible: title, text: title"></span>
+                <span data-bind="text: value"></span>
             </div>
         </div>
     </body>

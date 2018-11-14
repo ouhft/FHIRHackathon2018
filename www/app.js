@@ -5,6 +5,7 @@ function ViewModel() {
     self.patient = ko.observable(null);
     self.patientData = ko.observable(null);
     self.isReviewing = ko.observable(false);
+    self.medicalMarkdown = ko.observable("");
 
     self.nhsNumber.subscribe(function() {
         // Fetch patient ID here.
@@ -121,6 +122,53 @@ function ViewModel() {
 
         self.isReviewing(false);
     };
+
+    self.medicalMarkdown = ko.observable("");
+
+    self.ParsedMedical = ko.computed(function() {
+        linesRaw = self.medicalMarkdown();
+        lines = linesRaw.split(/\r\n|\n|\r/);
+        parsed = [];
+        for(line of lines) {
+            if (g = line.match("PR/ ([0-9]*) (reg)")) {
+                parsed.push({
+                    "title": "Pulse rate",
+                    "value": "Rate " + g[1] + " ," + " regular"
+                })
+            } else if (g = line.match("AVPU/ ([AVPU]+)")) {
+                value = ""
+                switch (g[1]) {
+                    case "A":
+                        value = "Alert";
+                        break;
+                    case "V":
+                        value = "Voice";
+                        break;
+                    case "P":
+                        value = "Pain";
+                        break;
+                    case "U":
+                        value = "Unresponsive";
+                }
+                parsed.push({
+                    "title": "Alertness",
+                    "value": value,
+                })
+            } else if (g = line.match("BP/ ([0-9]{2,3})[ /]{1}([0-9]{2,3})")) {
+                parsed.push({
+                    "title": "Blood Pressure",
+                    "value": g[1] + " / " + g[2],
+                })
+            } else {
+                parsed.push({
+                    "title": "",
+                    "value": line
+                })
+            }
+        }
+        console.log(parsed);
+        return parsed;
+    });
 }
 
 var vm = new ViewModel();
