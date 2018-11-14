@@ -58,6 +58,11 @@ function ViewModel() {
         })
     })
 
+    self.removedProcedures = ko.observable([]);
+    self.removedAllergies = ko.observable([]);
+    self.removedConditions = ko.observable([]);
+
+
     self.Allergies = ko.computed(function() {
         if (!(patientData = self.patientData())) return null;
 
@@ -69,6 +74,7 @@ function ViewModel() {
                 allergies.push({
                     "id": resource["id"],
                     "name": resource["code"]["coding"][0]["display"],
+                    "date": timeago().format(resource["assertedDate"]),
                     "reviewed": ko.observable(true),
                 });
             }
@@ -77,8 +83,56 @@ function ViewModel() {
         return allergies;
     });
 
-    self.removedProcedures = ko.observable([]);
-    self.removedAllergies = ko.observable([]);
+    self.Conditions = ko.computed(function() {
+        if (!(patientData = self.patientData())) return null;
+
+        conditions = [];
+
+        for(var entry of patientData["entry"]) {
+            resource = entry["resource"];
+            if (resource["resourceType"] == "Condition" && !self.removedConditions().includes(resource["id"])) {
+                c = {
+                    "id": resource["id"],
+                    "name": resource["code"]["coding"][0]["display"],
+                    "reviewed": ko.observable(true),
+                }
+                if (resource["assertedDate"]) {
+                    c["date"] = timeago().format(resource["assertedDate"])
+                } else {
+                    c["date"] = "Date unknown"
+                }
+                conditions.push(c);
+            }
+        }
+
+        return conditions;
+    });
+
+    self.Encounters = ko.computed(function() {
+        if (!(patientData = self.patientData())) return null;
+
+        encounters = [];
+
+        for(var entry of patientData["entry"]) {
+            resource = entry["resource"];
+            if (resource["resourceType"] == "Encounter") {
+                encounter = {
+                    "name": resource["type"]["0"]["coding"][0]["display"],
+                };
+
+                if (resource["period"]) {
+                    encounter["dateEnd"] = timeago().format(resource["period"]["end"])
+                } else {
+                    encounter["dateEnd"] = "Date unknown"
+                }
+
+                encounters.push(encounter);
+
+            }
+        }
+
+        return encounters;
+    });
 
     self.Procedures = ko.computed(function() {
         if (!(patientData = self.patientData())) return null;
@@ -103,22 +157,20 @@ function ViewModel() {
         self.isReviewing(true);
     };
 
-    self.finishReview = function() {
-        proceduresToRemove = [];
-        for(var Procedure of self.Procedures()) {
-            if (!Procedure.reviewed()) {
-                proceduresToRemove.push(Procedure["id"]);
+    function findElementsToRemove(elements) {
+        ids = [];
+        for(var element of elements) {
+            if (!element.reviewed()) {
+                ids.push(element["id"]);
             }
         }
-        self.removedProcedures(proceduresToRemove);
+        return ids;
+    }
 
-        allergiesToRemove = [];
-        for(var Allergy of self.Allergies()) {
-            if (!Allergy.reviewed()) {
-                allergiesToRemove.push(Allergy["id"]);
-            }
-        }
-        self.removedAllergies(allergiesToRemove);
+    self.finishReview = function() {
+        self.removedProcedures(findElementsToRemove(self.Procedures()));
+        self.removedAllergies(findElementsToRemove(self.Allergies()));
+        self.removedConditions(findElementsToRemove(self.Conditions()));
 
         self.isReviewing(false);
     };
