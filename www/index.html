@@ -7,28 +7,91 @@
             body {
                 font-family: "Montserrat"
             }
+            .patient {
+                border-radius: 4px;
+                background: #dddddd;
+                padding: 8px;
+            }
+            * {
+                margin: 0.25em;
+            }
+
+            button {
+                font-size: 12pt;
+                font-family: "Montserrat";
+                border: 1px solid #303030;
+                padding: 0.25em 0.5em;
+            }
+
+            .review {
+
+            }
+
+            .finishReview {
+                color: white;
+                background: #e45d5d;
+            }
+
+            .checkBox {
+                display: none;
+            }            
+
+            .inReview .checkBox {
+                display: inline;
+            }
+
+            .inReview .notReviewed {
+                text-decoration: line-through;
+                text: #888888;
+            }
         </style>
         <script src="app.js"></script>
     </head>
     <body>
         <input data-bind="value: nhsNumber" />
         <div data-bind="if: Patient">
-            <h2 data-bind="text: Patient().name"></h2>
-            <div data-bind="text: Patient().birthDay"></div>
+            <div class="patient">
+                <h2 data-bind="text: Patient().name"></h2>
+                <div data-bind="text: Patient().birthDay"></div>
+                <div>Gender: <span data-bind="text: Patient().gender"></span></div>
+                <div>GP: <span data-bind="text: Patient().gp"></span><a href="#">(show more)</a></div>
+                <button data-bind="visible: !Patient().confirmed(), click: Patient().confirm">Confirm</button>
+            </div>
         </div>
 
-        <div data-bind="if: Allergies">
-            <h2>Allergies</h2>
-            <ul data-bind="foreach: Allergies">
-                <li data-bind="text: name"></li>
-            </ul>
+        <br/>
+        <div data-bind="visible: patientData">
+            <button data-bind="click: startReview, visible: !isReviewing()">Review</button>
+            <button class="finishReview" data-bind="click: finishReview, visible: isReviewing()">Finalize & Create encounter</button>
         </div>
 
-        <div data-bind="if: Procedures">
-            <h2>Procedures</h2>
-            <ul data-bind="foreach: Procedures">
-                <li data-bind="text: name"></li>
-            </ul>
+        <div data-bind="css: { inReview: isReviewing() }">
+            <div data-bind="if: Allergies">
+                <h2>Allergies</h2>
+                <ul data-bind="foreach: Allergies">
+                    <li data-bind="css: { notReviewed: !reviewed() }">
+                        <input type="checkbox" class="checkbox" data-bind="checked: reviewed" /><span data-bind="text: name"></span>
+                    </li>
+                </ul>
+            </div>
+    
+            <div data-bind="if: Procedures">
+                <h2>Procedures</h2>
+                <ul data-bind="foreach: Procedures">
+                    <li data-bind="css: { notReviewed: !reviewed() }">
+                        <input type="checkbox" class="checkbox" data-bind="checked: reviewed" /><span data-bind="text: name"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div data-bind="if: isReviewing()">
+            <div>
+                <textarea cols="50" rows="10"></textarea>
+            </div>
+            <div>
+
+            </div>
         </div>
     </body>
 </html>
