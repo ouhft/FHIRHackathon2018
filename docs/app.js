@@ -230,6 +230,11 @@ function ViewModel() {
                     "title": "Blood Pressure",
                     "value": g[1] + " / " + g[2],
                 })
+            } else if (g = line.match("T/ ([0-9]{1,2})")) {
+                parsed.push({
+                    "title": "Temperature",
+                    "value": g[1] + "C"
+                })
             } else {
                 parsed.push({
                     "title": "",

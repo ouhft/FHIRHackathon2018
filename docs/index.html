@@ -167,7 +167,7 @@
                     <textarea data-bind="textInput: medicalMarkdown" cols="50" rows="10"></textarea>
                 </div>
             </div>
-            <ul data-bind="foreach: ParsedMedical">
+            <ul data-bind="foreach: ParsedMedical" style="min-height: 120px">
                 <li>
                     <span class="chip" data-bind="visible: title, text: title"></span>
                     <span data-bind="text: value"></span>
