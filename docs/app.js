@@ -1,7 +1,7 @@
 function ViewModel() {
     var self = this;
 
-    self.nhsNumber = ko.observable("9658218872");
+    self.nhsNumber = ko.observable("");
     self.patient = ko.observable(null);
     self.patientData = ko.observable(null);
     self.isReviewing = ko.observable(false);

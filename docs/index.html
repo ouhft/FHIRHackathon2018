@@ -9,6 +9,26 @@
                 font-family: "Montserrat"
             }
 
+            ol {
+                list-style: none;
+                counter-reset: my-awesome-counter;
+                padding-left: 0;
+            }
+
+            ol li {
+                counter-increment: my-awesome-counter;
+            }
+            ol li::before {
+                content: counter(my-awesome-counter);
+                background: #2f8f17;
+                color: white;
+                padding: 0.1em 0.5em;
+                font-weight: bold;
+                font-size: 90%;
+                border-radius: 20px;
+                vertical-align: top;
+            }
+
             .chip {
                 background: #265785;
                 color: white;
@@ -76,7 +96,7 @@
         <script src="app.js"></script>
     </head>
     <body>
-        NHS Number: <input data-bind="value: nhsNumber" />
+        NHS Number: <input data-bind="value: nhsNumber" /> (9658218873, 9658220142)
         <div data-bind="if: Patient">
             <div class="patient">
                 <h2 data-bind="text: Patient().name"></h2>
