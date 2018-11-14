@@ -2,7 +2,7 @@
 
 Notes from the day
 
-Main content for the day is on the Google Spreadsheet: https://docs.google.com/spreadsheets/d/16PGLc96aRH2ipBa79GUJJ_NYKZQv5RQPksT7g8GGELU/edit?ts=5bd2d5d6#gid=0
+Main content for the day is on the Google Spreadsheet: [https://docs.google.com/spreadsheets/d/16PGLc96aRH2ipBa79GUJJ_NYKZQv5RQPksT7g8GGELU/edit?ts=5bd2d5d6#gid=0]()
 
 
 ## Group 3 - A&E
@@ -20,5 +20,12 @@ Two stages
 1. Can we get the records from the providers?
 2. Can we get the data to our clinicians?
 
+Additionally later stage, what do we hand off to the ward?
+
 **Assumption**: The consuming organisation is OUH and therefore Cerner.
+
+
+Patient Record found by 
+
+* Care Connect Ref Implementation: [https://data.developer.nhs.uk/ccri-fhir/STU3/Patient?identifier=9658218873]()
 
