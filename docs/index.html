@@ -49,10 +49,14 @@
                 vertical-align: top;
             }
 
-            .patient {
+            .box {
+
                 border-radius: 4px;
-                background: #dddddd;
                 padding: 8px;
+            }
+
+            .patient {
+                background: #dddddd;
             }
             * {
                 margin: 0.25em;
@@ -63,6 +67,11 @@
                 font-family: "Montserrat";
                 border: 1px solid #303030;
                 padding: 0.25em 0.5em;
+            }
+
+
+            .encounters {
+                background: #dff7d9;
             }
 
             .review {
@@ -98,7 +107,7 @@
     <body>
         NHS Number: <input data-bind="value: nhsNumber" /> (9658218873, 9658220142)
         <div data-bind="if: Patient">
-            <div class="patient">
+            <div class="box patient">
                 <h2 data-bind="text: Patient().name"></h2>
                 <div data-bind="text: Patient().birthDay"></div>
                 <div>Gender: <span data-bind="text: Patient().gender"></span></div>
@@ -115,12 +124,14 @@
 
         <div data-bind="css: { inReview: isReviewing() }">
             <div data-bind="if: Encounters">
-                <h2>Encounters</h2>
-                <ol data-bind="foreach: Encounters">
-                    <li>
-                        <span data-bind="text: name"></span><span class="date" data-bind="text: dateEnd"></span>
-                    </li>
-                </ol>
+                <div class="box encounters">
+                    <h2>Encounters</h2>
+                    <ol data-bind="foreach: Encounters">
+                        <li>
+                            <span data-bind="text: name"></span><span class="date" data-bind="text: dateEnd"></span>
+                        </li>
+                    </ol>
+                </div>
             </div>
             <div data-bind="if: Allergies">
                 <h2>Allergies</h2>
