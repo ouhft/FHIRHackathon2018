@@ -51,3 +51,11 @@ Patient Record found by
 #### Project Aims
 
 **Big Picture** - Data should flow into the ED before the patient arrives at the doors. 111 and SCAS (ambulances) should share their data with OUH, which can then send out queries to other likely locations for data on this patient. The results of which can be shown within the PowerChart for the patient on arrival.
+
+# FHIR Profiles
+
+ - L1 - fhir.org
+ - L2 - fhir.hl7.org.uk
+    - things may be taken out
+    - add extensions, e.g. NHSNumberStatusCode, SNOMEDDescriptionID
+ - L3 - fhir.nhs.uk
