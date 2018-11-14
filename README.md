@@ -58,3 +58,10 @@ Patient Record found by:
 
 **Big Picture** - Data should flow into the ED before the patient arrives at the doors. 111 and SCAS (ambulances) should share their data with OUH, which can then send out queries to other likely locations for data on this patient. The results of which can be shown within the PowerChart for the patient on arrival.
 
+![](docs/img/Hackathon-context.png)
+
+
+
+
+
+
